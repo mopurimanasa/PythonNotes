@@ -12,6 +12,15 @@ Common Python Libraries
 
 1. Math Library:
 -> Used for mathematical operations.
+-> It provides mathematical functions like:
+
+sqrt() → square root
+ceil() → round up
+floor() → round down
+pow() → power
+log() → logarithm
+sin(), cos() → trigonometry
+
 import math
 print(math.sqrt(25))
 Output: 5.0
