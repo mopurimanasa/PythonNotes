@@ -72,10 +72,13 @@ iv) math.log(): math.log() is used to calculate the logarithm of a number.
 import math
 print(math.log(100)) = 4.605170185988092
 
-v) 
+c) Trigonometric Functions: sin(), cos(), tan() 
 
-
-
+import math
+angle = math.radians(30)  # Convert degrees to radians
+print(math.sin(angle))  # 0.5
+print(math.cos(angle))  # 0.866
+print(math.tan(angle))  # 0.577
 
 2. Random Library:
 -> Used to generate random values.
