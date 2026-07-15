@@ -1,0 +1,75 @@
+Python Libraries:
+
+-> A Python library is a collection of pre-written code (functions, classes, modules) that helps us perform specific tasks without writing everything from
+scratch.
+Why Use Libraries?
+-> Save development time
+-> Reduce code complexity
+-> Reuse tested code
+-> Perform complex tasks easily
+
+Common Python Libraries
+
+1. Math Library:
+-> Used for mathematical operations.
+import math
+print(math.sqrt(25))
+Output: 5.0
+
+2. Random Library:
+-> Used to generate random values.
+import random
+print(random.randint(1, 10))
+Output: 7
+
+3. Datetime Library
+-> Used to work with dates and times.
+import datetime
+print(datetime.datetime.now())
+
+4. OS Library
+-> Used for interacting with the operating system.
+import os
+print(os.getcwd())
+
+5. CSV Library
+-> Used for reading and writing CSV files.
+import csv
+-> Common in data processing projects.
+
+6. JSON Library
+-> Used to work with JSON data (widely used in APIs).
+import json
+
+Example:
+import json
+data = '{"name":"Manasa"}'
+result = json.loads(data)
+print(result["name"])
+Output: Manasa
+
+7. Pandas Library
+-> Used for data analysis and handling Excel/CSV files.
+import pandas as pd
+Example: 
+import pandas as pd
+df = pd.read_csv("employees.csv")
+print(df)
+
+8. NumPy Library
+-> Used for numerical computations and arrays.
+import numpy as np
+
+9. Matplotlib Library
+-> import matplotlib.pyplot as plt
+
+10. Requests Library
+-> Used for calling APIs and websites.
+import requests
+Example: 
+response = requests.get("https://example.com")
+print(response.status_code)
+
+
+
+
