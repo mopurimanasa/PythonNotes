@@ -1,0 +1,252 @@
+1) API design and standards:
+
+API design is the process of creating endpoints and rules that allow different systems to communicate with each other.
+
+The goal is to make APIs
+-> Easy to use
+-> Secure
+-> Maintainable
+-> Scalable
+-> Consistent
+
+REST Fundamentals:
+
+1) resources: 
+
+-> Use meaningful Resource Names i.e., use nouns not verbs
+
+Good:
+
+/users
+/accounts
+/orders
+
+bad:
+
+GET /getUsers
+POST /createUser
+
+2) Status codes: Use proper HTTP status Codes
+
+200 -> Success
+201 -> Created
+204 -> No Content
+400 -> Bad Request
+401 -> Unauthorize
+403 -> Forbidden
+404 -> Not Found
+500 -> Internal Server Error
+
+3) Use Proper HTTP Methods:
+
+GET -> Retrieve data
+POST -> Create data
+PUT -> Update entire resource
+PATCH -> Partial update
+DELETE -> Remove resource
+
+Example:
+
+GET /customers/100
+POST /customers
+PATCH /customers/100
+DELETE /customers/100
+
+4) Pagination:
+
+For large datasets:
+
+GET /customers?page=1&size=20
+or
+/users?page=1&limit=10
+
+Response:
+
+{
+"page": 1,
+"size": 20,
+"totalRecords": 100
+}
+
+-> Used for performance and handling large datasets
+
+5) Filtering and Sorting:
+
+Filtering:
+
+GET /customers?country=UK
+
+Sorting:
+
+GET /customers?sort=name
+
+6) Idempotency:
+
+Idempotency ensures that repeated requests do not create duplicate records.
+Idempotency ensures that repeated requests do not cause duplicate processing. For example, in a payment API, we use an idempotency-Key or transaction ID.
+If the client retries due to a timeout, the server recognizes the request has already been processed and returns the previous response instead of creating
+another payment. This prevents duplicate transactions and improve reliability in distributed systems.
+
+Example1: Bank Transfer (Without Idempotency)
+
+Suppose a client sends:
+
+POST / transfer
+{
+"fromAccount": "123",
+"toAccount": "456",
+"amount": 1000
+}
+
+If the network times out, the client may retry the request.
+
+Without Idempotency:
+
+-> First request transfer 1000
+-> Retry transfers another 1000
+
+Total transferred = 2000 (duplicate transaction)
+
+
+Example2: Bank Transfer (With Idempotency)
+
+Client sends an Idempotency-Key:
+
+POST /transfer
+Idempotency-Key: TXN-12345
+
+{
+"fromAccount" : "123",
+"toAccount" : "456",
+"amount" : 1000
+}
+
+Server behaviour:
+
+1. Processes request and stores response against TXN-12345
+2. If the same key is received again, it return the previous response instead of creating a new transfer.
+
+Result:
+
+-> First request -> 1000 transferred
+-> Retry with same key -> No new transfer
+
+Total transferres = 1000
+
+7) Contract-First Design:
+
+It is an API development approach where you define the API contract before writing the actual code.
+
+The contract specifies:
+
+-> Endpoints
+-> Request structure
+-> Response structure
+-> Data models
+-> Error responses
+-> Authentication requirements
+
+Usually this is defined using OpenAPI(Swagger) Specification.
+
+Example:
+
+First create the API contract in YAML file.
+After the contract is approved by consumers and stakeholders, developers implement the API according to the contract.
+
+Benefits:
+
+-> Clear Agreement between frontend and backend teams.
+-> Early feedback from consumers
+-> Consistent API design
+-> Auto-generated of documentation and code stubs
+-> Reduced integration issues.
+
+8) Versioning:
+
+Version APIs to avoid breaking existing consumers.
+
+/api/v1/customers
+/api/v2/customers
+
+9) Deprecation strategy
+
+Deprecation strategy is the process of safely phasing out old APIs without breaking existing clients.
+
+Why do we need it?
+
+In real projects:
+
+-> APIs change over time
+-> New versions are introduced
+-> Old APIs may have bugs or limitations
+
+❗ But:
+
+-> Existing clients (frontend, other systems) are still using old APIs
+-> So we cannot remove them suddenly
+
+What happens if we remove directly?
+❌ Applications may break
+❌ Production issues
+❌ Customer impact
+👉 That’s why we follow deprecation strategy
+
+Real-Time Example (User API)
+
+Step 1: Old API
+GET /api/v1/users
+
+Step 2: New API introduced
+GET /api/v2/users
+
+v2 may have:
+-> Better response format
+-> More fields
+-> Optimized performance
+
+Deprecation Process (Important Steps)
+🔹 1. Mark API as deprecated
+👉 You inform users:
+"message": "This API is deprecated. Please use /api/v2/users"
+
+OR via header:
+Deprecation: true
+
+🔹 2. Communicate to consumers
+
+Notify frontend teams
+Send emails / documentation updates
+Give timeline
+
+🔹 3. Provide alternative
+👉 Always give new API
+/api/v2/users
+
+🔹 4. Grace period
+👉 Allow time (e.g., 3–6 months)
+
+Both APIs work
+Clients migrate slowly
+
+🔹 5. Remove old API
+👉 After migration:
+/api/v1/users → removed
+
+Response Example:
+When deprecated API is called:
+{
+  "message": "This API is deprecated. Please migrate to /api/v2/users"
+}
+
+Optional headers:
+Deprecation: true
+Sunset: Dec 31, 2026
+
+----------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
