@@ -12,18 +12,70 @@ Common Python Libraries
 
 1. Math Library:
 -> Used for mathematical operations.
--> It provides mathematical functions like:
+-> The math module provides a wide range of mathematical functions for many different scientific and engineering applications, including the 
+following:
 
-sqrt() → square root
-ceil() → round up
-floor() → round down
-pow() → power
-log() → logarithm
-sin(), cos() → trigonometry
+a) Number Functions:
 
+i) math.ceil(): The math.ceil() method maps a floating-point number to the smallest succeeding integer
+p = 10.1
+print(math.ceil(p)) = 11
+
+ii) math.floor(): The math.floor() method maps a floating-point number to the greatest preceeding integer:
+q = 9.99
+print(math.floor(q)) = 9
+
+iii) math.factorial(): The math.factorial(n) method returns the product of all natural numbers less than or equal to n, if n a positive integer.
+However, if n = 0, it returns 1. The code below uses the math.factorial() to calculate $5!$
+n = 5
+print("{}! = {}".format(n, math.factorial(n))) = 5! = 120
+
+iv) math.gcd(): The math.gcd() method returns the greatest common denominator for two numbers; we can use it to reduce fractions.
+gcd = math.gcd(25, 120)
+print(gcd) = 5
+
+v) math.fabs(): The math.fabs() method removes the negative sign of a given number, if any, and returns its absolute value as a float:
+print(math.fabs(-25)) = 25.0
+
+b) Power and Logarithmic Functions:
+
+i) math.pow(): The math.pow() method returns a floating-point value representing the value of x to the power of y $(x^y)$.
+-> Let's try the math.pow() method by forecasting an investment. To do that, we need to know the initial deposit, the annual interest rate, 
+and the number of years that you invest your money in an investment account. Finally, by using the following formula, we can calculate the 
+final amount of the investment:
+${amount} = deposit(1+interest)^{years}$
+-> For example, consider the following values:
+    Initial deposit: $10,000
+    Annual interest rate: 4%
+    Number of years: 5
+-> The code calculates the final amount deposited in the investment account after five years:
+deposit = 10000
+interest_rate = 0.04
+number_years = 5
+final_amount = deposit * math.pow(1 + interest_rate, number_years)
+print("The final amount after five years is", final_amount)
+The final amount after five years is 12166.529024000001
+-> The math.pow(x, y) method always returns a floating-point value, Let’s check the data type of the function’s return value:
+print(type(math.pow(2, 4))) = <class 'float'>
+
+ii) math.exp(): math.exp(x) returns e^x (e raised to the power x).
+e = 2.71828...
+import math
+print(math.exp(2)) = 7.38905609893065
+
+iii) math.sqrt(): The math.sqrt() method returns the square root of a number.
 import math
 print(math.sqrt(25))
 Output: 5.0
+
+iv) math.log(): math.log() is used to calculate the logarithm of a number.
+import math
+print(math.log(100)) = 4.605170185988092
+
+v) 
+
+
+
 
 2. Random Library:
 -> Used to generate random values.
