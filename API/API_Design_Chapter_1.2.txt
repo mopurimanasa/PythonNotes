@@ -1,0 +1,240 @@
+API Design and methods:
+
+-> API design is the process of creating endpoints and rules that allow different systems to communicate with each other.
+-> This follows a typical 3-tier architecture – presentation layer (frontend), business logic layer (backend), and data layer (database)
+-> For example, in an e-commerce app, the React frontend sends a request when a user places an order, the backend processes it, and the database 
+stores the order and updates inventory.
+
+Common HTTP Methods:
+
+1. GET (Read data)
+
+-> Used to retrieve data
+-> GET method is used to fetch data from the server without modifying it.
+
+Example: 
+GET /users
+GET /users/101
+
+2. POST (Create data)
+
+-> Used to create new data
+-> POST method is used to send data to the server to create a new resource.
+
+Example:
+POST /users
+
+Body:
+{
+  "name": "Manasa",
+  "role": "Engineer"
+}
+
+3. PUT (Update full data)
+
+-> Used to update entire resource
+-> PUT is used to completely update an existing resource.
+
+Example:
+PUT /users/101
+
+Body:
+{
+  "id": 101,
+  "name": "Manasa",
+  "role": "Engineer"
+}
+
+4. PATCH (Update partial data)
+
+-> Used to update specific fields
+-> PATCH is used for partial updates of a resource.
+
+Example:
+PATCH /users/101
+
+Body:
+{
+  "role": "Senior Engineer"
+}
+
+✅ What happens:
+👉 The server:
+Finds user with ID 101
+Updates only the role field
+Keeps other fields unchanged
+
+5. DELETE (Delete data)
+
+-> Used to remove data
+-> DELETE method is used to remove a resource from the server.
+
+Example: 
+DELETE /users/101
+
+->Usually no body is required
+
+API Design Best Practices:
+
+1. Use proper naming
+/users
+/orders
+/products
+
+2. Use nouns, not verbs
+✅ /users
+❌ /getUsers
+
+3. Use status codes clearly
+| Code | Meaning      |
+| ---- | ------------ |
+| 200  | Success      |
+| 201  | Created      |
+| 400  | Bad request  |
+| 404  | Not found    |
+| 500  | Server error |
+
+4. Version your API
+/api/v1/users
+
+5. Keep responses consistent
+{
+  "status": "success",
+  "data": {...}
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+-> In my project, I worked on designing REST APIs using Python.
+-> We used GET for fetching data, POST for creating records, PUT/PATCH for updates, and DELETE for removal.
+-> We also ensured proper status codes and followed RESTful naming conventions like /users and /transactions
+
+--------------------------------------------------------------------------------------------------------------
+
+Example: Imagine you're building APIs for an online shopping app.
+
+1. GET → Fetch User
+
+✅ Request
+GET /users/101
+
+✅ Response (Success)
+{
+  "id": 101,
+  "name": "Manasa",
+  "email": "manasa@gmail.com",
+  "role": "Engineer"
+}
+
+✅ Status Codes
+✅ 200 OK (success)
+❌ 404 Not Found (user doesn’t exist)
+
+✅ Interview line:
+“GET is used to retrieve user details without changing data.”
+
+
+2. POST → Create User
+
+✅ Request
+POST /users
+
+Body:
+{
+  "name": "Manasa",
+  "email": "manasa@gmail.com",
+  "role": "Engineer"
+}
+
+✅ Response
+{
+  "id": 102,
+  "message": "User created successfully"
+}
+
+✅ Status Codes
+✅ 201 Created
+❌ 400 Bad Request (invalid input)
+
+✅ Interview line:
+“POST is used to create a new user.”
+
+
+3. PUT → Full Update User
+
+✅ Request
+PUT /users/101
+
+Body:
+{
+  "name": "Manasa",
+  "email": "manasa_new@gmail.com",
+  "role": "Senior Engineer"
+}
+
+✅ Response
+{
+  "message": "User updated successfully"
+}
+
+✅ Status Codes
+✅ 200 OK
+✅ 204 No Content (if no response body)
+❌ 404 Not Found
+
+✅ Important:
+👉 Replaces entire user data
+✅ Interview line:
+“PUT is used to completely update a user by replacing all fields.”
+
+4. PATCH → Partial Update User
+
+✅ Request
+PATCH /users/101
+
+Body:
+{
+  "role": "Lead Engineer"
+}
+
+✅ Response
+{
+  "message": "User updated successfully"
+}
+
+✅ Status Codes
+✅ 200 OK
+❌ 404 Not Found
+
+✅ Important:
+👉 Updates only one field
+✅ Interview line:
+“PATCH is used to partially update user details like role or email.”
+
+5. DELETE → Remove User
+
+✅ Request
+DELETE /users/101
+
+✅ Response
+{
+  "message": "User deleted successfully"
+}
+
+(Or sometimes no response body)
+✅ Status Codes
+
+✅ 204 No Content
+✅ 200 OK
+❌ 404 Not Found
+
+✅ Interview line:
+“DELETE is used to remove a user from the system.”
+
+--------------------------------------------------------------------------------------------------------------
+
+In a user API, we use GET to fetch user details, POST to create a new user, PUT to completely update user information, PATCH to update specific fields, 
+and DELETE to remove a user. Each operation returns appropriate status codes like 200 for success, 201 for creation, 204 for deletion, and 404 if the user 
+is not found.
+
+--------------------------------------------------------------------------------------------------------------

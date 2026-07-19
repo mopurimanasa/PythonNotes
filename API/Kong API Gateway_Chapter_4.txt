@@ -1,0 +1,167 @@
+Kong API Gateway:
+
+-> Kong API Gateway is an API Gateway that sits between the client (mobile app/web app) and your backend APIs. It acts like a security guard and 
+traffic manager for all API requests.
+-> Simple architecture
+
+Client (Mobile/Web)
+        |
+        | HTTPS Request
+        v
++-------------------+
+|  Kong API Gateway |
++-------------------+
+   |      |      |
+   v      v      v
+API 1   API 2   API 3
+-> Instead of clients calling your backend APIs directly, they call Kong. Kong then forwards the request to the correct backend service.
+
+========================================================================
+What does Kong do?
+========================================================================
+
+Authentication
+
+-> Verifies who is calling the API.
+-> Supports API Keys, JWT, OAuth 2.0, mTLS, etc.
+
+========================================================================
+
+Authorization
+
+-> Controls which APIs a client is allowed to access.
+
+========================================================================
+
+Rate Limiting
+
+-> Rate limiting is a technique used to control how many requests a client can make to an API/server within a specific time period.
+Example: Allow only 100 requests per minute.
+
+========================================================================
+
+Load Balancing
+
+-> Distributes requests across multiple backend servers.
+
+========================================================================
+
+Logging & Monitoring
+
+-> Records API requests and responses.
+
+========================================================================
+
+SSL/TLS Termination
+
+-> Handles HTTPS encryption.
+
+========================================================================
+
+Request/Response Transformation
+
+-> Can add, remove, or modify headers, query parameters, or request bodies.
+
+========================================================================
+
+With Kong:
+Mobile App
+     |
+     v
+Kong API Gateway
+     |
+     +--> Product API
+     +--> Payment API
+     +--> Order API
+	 
+========================================================================
+
+Before forwarding the request, Kong checks:
+
+-> Is the client authenticated?
+-> Is the JWT valid?
+-> Has the rate limit been exceeded?
+-> Should the request be logged?
+
+If everything is valid, Kong forwards the request to the appropriate backend API.
+
+========================================================================
+
+Why do companies use Kong?
+
+-> Centralized security
+-> Easy API management
+-> Built-in plugins (authentication, rate limiting, logging, caching, etc.)
+-> High performance
+-> Scalable for microservices and cloud environments
+
+========================================================================
+
+Why do we need to use kong ?
+
+Without Kong:
+Suppose you have 3 backend APIs:
+
+User API
+Payment API
+Order API
+
+Each API would need to implement:
+
+Authentication
+Authorization
+Rate limiting
+Logging
+SSL/TLS handling
+
+Client
+  |
+  +--> User API (Authentication + Logging + Rate Limiting)
+  +--> Payment API (Authentication + Logging + Rate Limiting)
+  +--> Order API (Authentication + Logging + Rate Limiting)
+  
+This means you're writing and maintaining the same functionality in multiple services.
+
+========================================================================
+With Kong
+All requests first go to Kong.
+Client
+   |
+   v
+Kong API Gateway
+   |
+   +--> User API
+   +--> Payment API
+   +--> Order API
+Kong performs the common tasks once:
+✅ Authentication
+✅ Authorization
+✅ Rate limiting
+✅ Logging
+✅ SSL/TLS
+✅ Routing to the correct backend API
+
+-> Your backend APIs can then focus only on business logic.
+========================================================================
+Real-world example:
+
+-> Imagine an online banking application.
+-> When a customer calls:
+GET /accounts/123
+-> The request goes to Kong first.
+
+Kong checks:
+-> Is the user authenticated?
+-> Is the JWT token valid?
+-> Has the user exceeded the allowed request limit?
+-> Log the request.
+-> Forward it to the Account API.
+
+-> The Account API simply retrieves the account details and returns them. 
+	It doesn't have to implement all those common security and traffic-management features.
+	
+One-line interview answer:
+-> We use Kong API Gateway to centralize common API functionalities such as authentication, authorization, rate limiting, routing, logging, and security,
+so backend services can focus on business logic while Kong handles cross-cutting concerns.
+========================================================================
+

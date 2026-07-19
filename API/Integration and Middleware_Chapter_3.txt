@@ -1,0 +1,96 @@
+This area is about:
+“How different services communicate and work together in a scalable system.”
+
+1) API Gateways:
+
+-> An API Gateway is a single entry point for all client requests to your backend services.
+-> An API gateway is an API management tool that sits between a client and collection of backend services
+-> An API gateway acts as a reverse proxy to accept all application programming interface(API) calls, aggregate the various services required to fulfill
+them, and return the appropriate result.
+-> Without API Gateway
+Mobile App
+     ├── User API
+     ├── Payment API
+     ├── Order API
+     └── Notification API
+The client has to know the address of every API.
+
+-> With API Gateway
+Mobile App
+      │
+      ▼
++------------------+
+|   API Gateway    |
++------------------+
+   │     │      │
+   ▼     ▼      ▼
+User   Payment  Order APIs
+
+-> The client only talks to the API Gateway. The gateway forwards the request to the correct backend service.
+-> What does an API Gateway do?
+
+Routes requests
+/users → User Service
+/payments → Payment Service
+/orders → Order Service
+
+==================================================================
+Authentication:
+
+-> Checks whether the client has a valid JWT or OAuth token.
+-> If the token is invalid, it returns 401 Unauthorized.
+
+==================================================================
+
+Authorization:
+
+-> Checks whether the authenticated user is allowed to access a resource.
+Example: Only admins can access /admin.
+
+==================================================================
+
+Rate limiting:
+
+-> Prevents abuse.
+-> Example: Only 100 requests per minute per user.
+
+==================================================================
+
+Logging & Monitoring:
+
+-> Records every request and response for debugging and analytics.
+
+==================================================================
+
+Load balancing:
+
+-> If there are multiple instances of a service, it distributes traffic among them.
+
+==================================================================
+
+Real-world example:
+
+-> Imagine you're using the HSBC mobile app.
+-> You tap "Check Balance."
+-> Instead of the app calling the Account Service directly:
+
+Mobile App
+    │
+    ▼
+API Gateway
+    │
+    ▼
+Account Service
+
+The API Gateway:
+-> Verifies your JWT token.
+-> Checks if you're logged in.
+-> Forwards the request to the Account Service.
+-> Returns the account balance to the app.
+
+API Gateway is a centralized entry point for client requests. It routes requests to the appropriate backend service while handling authentication,
+authorization, rate limiting, logging, caching, and load balancing.Since you mentioned you have API development experience, I can also explain how an 
+API Gateway works with JWT, OAuth 2.0, mTLS, and AWS API Gateway
+
+-----------------------------------------------------------------------------------------------------------
+
