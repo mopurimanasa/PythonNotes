@@ -1,0 +1,123 @@
+-> The os module is a built-in Python library used to interact with the Operating System. It lets you work with files, folders, environment variables, and 
+system-related operations.
+
+import os
+
+1. Get Current Working Directory
+
+import os
+print(os.getcwd())
+
+Output: C:\Users\Manasa\Documents
+
+2. Change Current Directory
+
+import os
+os.chdir("C:\\Users\\Manasa\\Documents")
+print(os.getcwd())
+
+3. List Files and Folders
+
+import os
+print(os.listdir())
+
+Output: ['notes.txt', 'python.py', 'Documents']
+
+4. Create a Directory
+
+import os
+os.mkdir("PythonNotes")
+
+Create nested directories: 
+
+os.makedirs("Python\\Backend\\API")
+
+5. Remove a Directory: Remove an empty directory:
+
+os.rmdir("PythonNotes")
+
+6. Rename a File or Folder
+
+import os
+os.rename("old.txt", "new.txt")
+
+7. Delete a File
+
+import os
+os.remove("sample.txt")
+
+8. Check Whether a File Exists
+
+import os
+print(os.path.exists("sample.txt"))
+
+Output: True
+
+9. Check File or Directory
+
+import os
+print(os.path.isfile("sample.txt"))
+print(os.path.isdir("Documents"))
+
+10. Join Paths: Instead of manually writing \ or /, use os.path.join().
+
+import os
+path = os.path.join("Documents", "Python", "notes.txt")
+print(path)
+
+Output (Windows): Documents\Python\notes.txt
+
+11. Get File Name and Extension
+
+import os
+path = "Documents/notes.txt"
+print(os.path.basename(path))
+print(os.path.dirname(path))
+
+Output: 
+notes.txt
+Documents
+
+12. Environment Variables
+
+import os
+print(os.environ.get("USERNAME"))
+
+13. Execute System Command
+
+import os
+os.system("dir")     # Windows
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+What is os.environ?
+os.environ is a dictionary-like object that stores environment variables.
+
+Instead of hardcoding values like:
+
+secretName = "my-secret"
+region = "ap-south-1"
+
+you read them from the operating system:
+
+import os
+secretName = os.environ["SECRET_NAME"]
+
+This makes your application:
+
+More secure (no passwords or secrets in code)
+Configurable for different environments (Development, QA, UAT, Production)
+Easier to deploy
+
+Yes. In my AWS Lambda project, I used Python's os module to read environment variables using os.environ. We stored configuration values such as the database host, 
+database name, AWS region, S3 bucket name, and secret name as environment variables instead of hardcoding them. This improved security and allowed the same code to be deployed
+ across different environments like Development, QA, and Production by changing only the environment variable values
+ 
+ 
+
+
+
+
+
+
+
