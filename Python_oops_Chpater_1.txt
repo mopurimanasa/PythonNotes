@@ -1,0 +1,257 @@
+->OOP (Object-Oriented Programming) is a programming approach where you structure your code using objects and classes. It helps in organizing code,
+reusability, and scaling applications.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+1. What is a Class?
+-> A class is a blueprint or template for creating objects.
+
+Syntax: 
+class ClassName:
+
+    def __init__(self, parameter):
+        self.variable = parameter
+
+    def method_name(self):
+		# write your logic here
+        pass
+		
+Example:
+class Car:
+
+    def __init__(self, color):
+        self.color = color
+
+    def display(self):
+        print(self.color)
+
+Usage:
+car1 = Car("Red")
+car1.display()
+
+Output:
+Red
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+2. What is an Object?
+An object is an instance of a class.
+
+Syntax:
+object_name = ClassName(parameters)
+
+Example:
+class Car:
+    def __init__(self, color):
+        self.color = color
+
+#Creating Object
+car1 = Car("Red")
+#Using the Object
+print(car1.color)
+
+Output:
+Red
+
+Simple Understanding:
+car1 → object (instance)
+Car → class
+"Red" → value passed to class
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Constructor (__init__)
+The constructor initializes object properties when an object is created.
+Syntax:
+class ClassName:
+
+    def __init__(self, parameter):
+        self.variable = parameter
+
+class Car:
+    def __init__(self, brand, color):
+        self.brand = bran
+        self.color = color
+
+car1 = Car("Tesla", "Red")
+print(car1.brand)  # Tesla
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Instance Methods
+Functions inside a class are called methods.
+
+class Car:
+    def __init__(self, brand):
+        self.brand = brand
+    
+    def display(self):  # instance method
+        print("Car brand is:", self.brand)
+
+car1 = Car("BMW") 
+car1.display() # Using Instance Method
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Access Modifiers:
+
+In Python, access modifiers are used to control how variables and methods are accessed from outside a class.
+
+Types of Access Modifiers in Python:
+
+1. Public (default):
+* Accessible from anywhere (inside and outside the class)
+* All variables are public by default
+* Meaning: you can access them from anywhere
+* No restriction
+
+class Car:
+    def __init__(self):
+        self.brand = "Toyota" #variable
+
+car = Car()
+print(car.brand)   # ✅ Works fine
+
+=======================================================================================================
+2. Protected (_single underscore)
+* Meant to be used within the class and subclasses
+* Still accessible outside, but not recommended
+
+Because:
+It is intended for internal use
+Mostly used when working with inheritance
+
+class Car:
+    def __init__(self):
+        self._model = "Camry"   # protected variable
+
+car = Car()
+print(car._model)   # ⚠️ Works, but not recommended
+
+Example with child class (best use case):
+
+class Car:
+    def __init__(self):
+        self._brand = "Toyota"
+
+
+class ElectricCar(Car):
+    def show_brand(self):
+        print(self._brand)   # ✅ accessed inside child class
+
+
+e = ElectricCar()
+e.show_brand()
+
+=======================================================================================================
+3. Private (__double underscore)
+
+*Meant to be used only inside the class
+*Not directly accessible from outside
+
+class Car:
+    def __init__(self):
+        self.__brand = "Toyota"   # private variable
+
+car = Car()
+print(car.__brand)   # ❌ Error
+
+This will give an error like:
+AttributeError: 'Car' object has no attribute '__brand'
+
+How to access (if needed)
+print(car._Car__brand)   # ✅ Works (but not recommended)
+
+Correct way to use private (important)
+*We don’t access directly
+*Instead, we use methods (functions)
+
+class Car:
+    def __init__(self):
+        self.__brand = "Toyota"
+
+    def get_brand(self):
+        return self.__brand
+car = Car()
+print(car.get_brand())   # ✅ Proper way
+
+===========================================================================================================
+
+*Public -> name -> Anywhere ✅
+*Protected -> _name -> Class + Child ✅
+*Private -> __name -> Only inside class ✅
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+5. Four Pillars of OOP
+
+a. Encapsulation
+Hiding internal data and exposing only required parts.
+
+->Easy example (real life)
+
+Think of a capsule (medicine) 💊
+Inside: medicine (hidden)
+Outside: cover
+You can only use it in a proper way, not directly access inside
+
+->In Python (simple idea)
+
+Data (variables) + methods (functions) are kept together in a class
+You don’t access everything directly
+You use controlled methods
+
+Simple Python Example:
+
+class Car:
+    def __init__(self):
+        self.brand = "Toyota"      # public
+        self._model = "Camry"      # protected
+        self.__price = 30000       # private
+
+    def get_price(self):
+        return self.__price   # controlled access
+		
+car = Car()
+
+print(car.brand)        # ✅ OK
+print(car._model)       # ⚠️ Not recommended but possible
+print(car.__price)      # ❌ Error (hidden)
+print(car.get_price())  # ✅ Access using method
+
+-> finally Encapsulation is the process of hiding internal data and allowing access only through defined methods.
+
+-> Why we use it?
+Protect data 🔒
+Avoid mistakes ❌
+Control access ✅
+Make code cleaner ✅
+
+==============================================================================================================
+
+b. Inheritance
+
+Inheritance is the process of acquring the members of one class into another class.
+
+->Real-life example
+Think of Parent and Child 👨‍👦
+Child gets features from parent
+Like: name, eye color, habits
+Same in programming!
+
+# Parent class
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+# Child class
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+		
+		
+How code is reused in Inheritance (simple idea)
+👉 When a child class inherits from a parent class, it automatically gets all the methods and variables from the parent.
+➡️ So, you don’t write the same code again ✅
+
+
+
+
+
+
+
