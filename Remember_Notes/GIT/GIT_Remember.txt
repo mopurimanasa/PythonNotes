@@ -1,0 +1,43 @@
+There are two separate places:
+
+1. Your Local Repository (Git on your laptop)
+-> Managed through Git Bash
+-> Exists on your computer
+
+2. Remote Repository (GitHub)
+-> Exists on GitHub's servers
+-> Managed through the GitHub website
+
+-> They are not automatically synchronized.
+
+--------------------------------------------------------------------------------------------------------
+Your Laptop (Local)                GitHub (Remote)
+
+Git Bash  <--------------------->  GitHub Repository
+          (using git commands)
+		  
+--------------------------------------------------------------------------------------------------------
+
+Example: You change something on GitHub
+
+Suppose you go to GitHub and:
+-> Rename a branch
+-> Add a README
+-> Edit a file
+-> Create a new branch
+
+Has your local Git repository changed? No.
+
+-> Your laptop has no idea that GitHub changed.
+-> You must ask Git to check GitHub.
+
+git fetch
+
+or 
+
+git fetch --all
+
+-> Now your local Git knows what changed on GitHub.
+
+
+--------------------------------------------------------------------------------------------------------
