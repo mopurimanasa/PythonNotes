@@ -1,0 +1,88 @@
+-> The CSV library in Python is a built-in module used to read, write, and process CSV (Comma Separated Values) files.
+Why use CSV? CSV files are commonly used for:
+-> Storing tabular data
+-> Importing/exporting data between applications
+-> Reports and analytics
+-> Customer, employee, and transaction records
+
+Example CSV file (employees.csv):
+id,name,salary
+101,Manasa,50000
+102,Ravi,60000
+103,Priya,70000
+
+Import CSV Module
+import csv
+
+1. Reading a CSV File
+
+import csv
+with open("employees.csv", "r") as file:
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)	
+Output:
+['id', 'name', 'salary']
+['101', 'Manasa', '50000']
+['102', 'Ravi', '60000']
+['103', 'Priya', '70000']
+
+Explanation
+-> csv.reader() reads the file row by row.
+-> Each row is returned as a list.
+
+2. Writing to a CSV File
+
+import csv
+with open("employees.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+
+    writer.writerow(["id", "name", "salary"])
+    writer.writerow([101, "Manasa", 50000])
+    writer.writerow([102, "Ravi", 60000])
+Output:	
+id,name,salary
+101,Manasa,50000
+102,Ravi,60000
+
+3. Writing Multiple Rows
+
+import csv
+data = [
+    [101, "Manasa", 50000],
+    [102, "Ravi", 60000],
+    [103, "Priya", 70000]
+]
+with open("employees.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+4. Reading CSV as Dictionary
+
+import csv
+with open("employees.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row)
+		
+Output:
+{'id': '101', 'name': 'Manasa', 'salary': '50000'}
+{'id': '102', 'name': 'Ravi', 'salary': '60000'}
+
+5. Writing Dictionary Data
+
+import csv
+with open("employees.csv", "w", newline="") as file:
+    fieldnames = ["id", "name", "salary"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerow({
+        "id": 101,
+        "name": "Manasa",
+        "salary": 50000
+    })
+	
+The CSV module is a built-in Python library used to read, write, and process CSV files. It provides functions like csv.reader(),
+csv.writer(), csv.DictReader(), and csv.DictWriter() to work with tabular data efficiently. 
+It is widely used for data exchange, reporting, and batch processing applications.
