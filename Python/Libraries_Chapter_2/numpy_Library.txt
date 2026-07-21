@@ -1,0 +1,119 @@
+NumPy Library:
+-> NumPy (Numerical Python) is a powerful Python library used for numerical computing. It provides support for multi-dimensional arrays, mathematical operations, 
+linear algebra, statistics, and random number generation.
+Why NumPy?
+-> Faster than Python lists
+-> Less memory usage
+-> Supports vectorized operations
+-> Mathematical and statistical functions
+-> Linear algebra
+-> Random number generation
+
+Import NumPy: import numpy as np
+
+1) Creating Arrays
+
+a) np.array(): Creates a NumPy array from a Python list or tuple.
+Syntax: np.array(object)
+Example: 
+import numpy as np
+arr = np.array([10, 20, 30, 40])
+print(arr)
+Output:
+[10 20 30 40]
+
+2D Array: 
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+print(arr)
+Output:
+[[1 2 3]
+ [4 5 6]]
+ 
+b) np.zeros(): Creates an array filled with 0s.
+Syntax: np.zeros(shape)
+Example: 
+arr = np.zeros(5)
+print(arr)
+Output:
+[0. 0. 0. 0. 0.]
+
+arr = np.zeros((2,3))
+print(arr)
+Output
+[[0. 0. 0.]
+ [0. 0. 0.]]
+ 
+c) np.arange(): Works like Python's range(), but returns a NumPy array.
+
+Syntax: np.arange(start, stop, step)
+Example: 
+arr = np.arange(5)
+print(arr)
+Output: [0 1 2 3 4]
+
+arr = np.arange(1,10)
+print(arr)
+Output: [1 2 3 4 5 6 7 8 9]
+
+arr = np.arange(0,20,2)
+print(arr)
+Output: [ 0  2  4  6  8 10 12 14 16 18]
+
+d) np.linspace(): Creates equally spaced numbers between two values.
+Syntax: np.linspace(start, stop, num)
+Example: 
+arr = np.linspace(1,10,5)
+print(arr)
+Output: [ 1.    3.25  5.5   7.75 10.  ]
+
+e) Array Attributes
+
+arr.shape
+arr.ndim
+arr.size
+arr.dtype
+
+f) Indexing & Slicing
+
+arr[0]
+arr[1:4]
+arr[1,2]
+
+g) Reshaping
+
+reshape()
+flatten()
+ravel()   # Basic idea
+
+h) Mathematical Operations
+
++  -  *  /
+np.sqrt()
+np.power()
+np.exp()
+
+I) Statistical Functions
+
+np.sum()
+np.mean()
+np.max()
+np.min()
+np.std()
+np.median()
+
+j) Boolean Indexing (Filtering)
+
+arr[arr > 10]
+
+Random Module
+
+np.random.rand()
+np.random.randint()
+np.random.seed()
+Stacking & Splitting
+np.concatenate()
+np.vstack()
+np.hstack()
