@@ -1,0 +1,622 @@
+-> Pandas is one of the most popular Python libraries used for data manipulation, data analysis, and data cleaning. 
+It provides powerful and easy-to-use data structures like Series and DataFrame.
+
+Key Features:
+-> Read and write data (CSV, Excel, JSON, SQL, etc.)
+-> Handle missing values
+-> Filter and sort data
+-> Merge and join datasets
+-> Group and aggregate data
+-> Perform statistical analysis
+-> Clean and transform data
+
+Import Pandas- import pandas as pd
+
+1. Series: A Series is a one-dimensional labeled array.
+import pandas as pd
+data = pd.Series([10, 20, 30, 40])
+print(data)
+
+Output:
+0    10
+1    20
+2    30
+3    40
+dtype: int64
+
+2. DataFrame: It is a two dimensional array which contains rows and columns.
+import pandas as pd
+data = {
+    "Name": ["Manasa", "Akhil", "Rahul"],
+    "Age": [30, 32, 28],
+    "City": ["Hyderabad", "London", "Delhi"]
+}
+df = pd.DataFrame(data)
+print(df)
+
+Output:
+     Name  Age       City
+0  Manasa   30  Hyderabad
+1   Akhil   32     London
+2   Rahul   28      Delhi
+
+-> Read pandas common functions from a book.
+
+In backend and data engineering projects, Pandas is commonly used for:
+
+-> Reading CSV, Excel, and JSON files.
+-> Cleaning and transforming data before storing it in databases.
+-> Validating API request/response data.
+-> Generating reports and analytics.
+-> Performing ETL (Extract, Transform, Load) operations.
+-> Data preprocessing for Machine Learning and AI models.
+
+Common Interview Questions:
+
+1. loc vs iloc:
+
+| `loc`                                    | `iloc`                                   |
+| ---------------------------------------- | ---------------------------------------- |
+| Selects data using **row/column labels** | Selects data using **integer positions** |
+| Label-based indexing                     | Position-based indexing                  |
+| End index is included when slicing       | End index is excluded                    |
+
+Example:
+
+import pandas as pd
+data = {
+    "Name": ["John", "Alice", "Bob"],
+    "Age": [25, 30, 28]
+}
+df = pd.DataFrame(data, index=["A", "B", "C"])
+Output: 
+    Name  Age
+A   John   25
+B  Alice   30
+C    Bob   28
+
+-> Using loc: 
+
+df.loc["A"]
+Output: 
+Name    John
+Age       25
+Name: A, dtype: object
+
+locdf1 = df.loc["A":"B"]
+print(locdf1)
+Output: 
+    Name  Age
+A   John   25
+B  Alice   30
+
+-> Using iloc
+
+df.iloc[0]
+Output: 
+Name    John
+Age       25
+
+df.iloc[0:2]
+Output: 
+    Name  Age
+A   John   25
+B  Alice   30
+
+-> loc accesses rows and columns using labels, whereas iloc accesses them using integer positions.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+2) merge(), join(), concat():
+
+-> merge():Used to combine DataFrames based on a common column (similar to SQL JOIN).
+
+df1 = pd.DataFrame({
+    "ID":[1,2],
+    "Name":["John","Alice"]
+})
+
+df2 = pd.DataFrame({
+    "ID":[1,2],
+    "Salary":[50000,60000]
+})
+
+pd.merge(df1, df2, on="ID")
+
+Output:
+ID Name Salary
+1 John 50000
+2 Alice 60000
+
+-> join(): Joins DataFrames using their indexes.
+
+import pandas as pd
+
+df1 = pd.DataFrame({
+    "Name": ["John", "Alice"]
+}, index=[1, 2])
+
+df2 = pd.DataFrame({
+    "Salary": [50000, 60000]
+}, index=[1, 2])
+
+print(df1)
+print(df2)
+
+df1:
+    Name
+1   John
+2  Alice
+
+df2:
+   Salary
+1   50000
+2   60000
+
+Join the DataFrames: 
+result = df1.join(df2)
+print(result)
+
+Output:
+    Name  Salary
+1   John   50000
+2  Alice   60000
+
+-> join() combines two DataFrames based on their index by default. In this example, both DataFrames have indexes 1 and 2, so Pandas matches these indexes and joins the 
+corresponding rows together.
+
+or
+
+result = df1.join(df2.set_index("ID"), on="ID")
+print(result)
+
+or 
+
+df1 = df1.set_index("ID")
+df2 = df2.set_index("ID")
+result = df1.join(df2)
+print(result)
+
+
+3) concat(): concat() in Pandas is used to combine two or more DataFrames either row-wise or column-wise.
+
+a) Concatenate Rows (axis=0) - Default:
+
+import pandas as pd
+df1 = pd.DataFrame({
+    "ID": [1, 2],
+    "Name": ["John", "Alice"]
+})
+df2 = pd.DataFrame({
+    "ID": [1, 2],
+    "Salary": [50000, 60000]
+})
+
+df1:
+
+   ID   Name
+0   1   John
+1   2  Alice
+
+df2:
+
+   ID  Salary
+0   1   50000
+1   2   60000
+
+1. Default (axis=0): If you don't specify axis, Pandas assumes axis=0.
+
+result = pd.concat([df1, df2])
+print(result)
+
+Output:
+   ID   Name   Salary
+0   1   John      NaN
+1   2  Alice      NaN
+0   1    NaN  50000.0
+1   2    NaN  60000.0
+
+Explanation
+-> df2 is placed below df1.
+-> Pandas combines the columns from both DataFrames.
+-> Missing values are filled with NaN.
+-> The original indexes (0,1) are kept.
+
+b) axis=1 (Column-wise Concatenation): 
+
+result = pd.concat([df1, df2], axis=1)
+print(result)
+
+Output:
+   ID   Name  ID  Salary
+0   1   John   1   50000
+1   2  Alice   2   60000
+
+Explanation
+-> axis=1 means combine columns (horizontal concatenation).
+-> df2 is placed next to df1.
+-> Since both DataFrames have the same indexes (0 and 1), the rows are matched correctly.
+-> Both ID columns are retained.
+
+c) ignore_index=True
+
+result = pd.concat([df1, df2], ignore_index=True)
+print(result)
+
+Output:
+   ID   Name   Salary
+0   1   John      NaN
+1   2  Alice      NaN
+2   1    NaN  50000.0
+3   2    NaN  60000.0
+
+-> ignore_index=True resets the index after concatenation.
+-> Instead of keeping the original indexes (0,1,0,1), Pandas creates new sequential indexes (0,1,2,3).
+-> This is useful when you don't want duplicate index values.
+
+| Code                                       | Meaning                   | Result                                           |
+| ------------------------------------------ | ------------------------- | ------------------------------------------------ |
+| `pd.concat([df1, df2])`                    | Default (`axis=0`)        | Stacks `df2` **below** `df1`.                    |
+| `pd.concat([df1, df2], axis=0)`            | Row-wise concatenation    | Same as the default.                             |
+| `pd.concat([df1, df2], axis=1)`            | Column-wise concatenation | Places `df2` **beside** `df1`.                   |
+| `pd.concat([df1, df2], ignore_index=True)` | Reset index               | Stacks rows and creates new indexes (`0,1,2,3`). |
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+3. groupby(): used to group data and perform aggregate calculations:
+
+Example:
+data = {
+    "Department":["IT","HR","IT","HR"],
+    "Salary":[50000,45000,60000,47000]
+}
+df = pd.DataFrame(data)
+df.groupby("Department")["Salary"].mean()
+
+Output:
+HR    46000
+IT    55000
+
+Explanation:
+DataFrame
+
+  Department  Salary
+0         IT   50000
+1         HR   45000
+2         IT   60000
+3         HR   47000
+
+Step 1: 
+
+-> df.groupby("Department") -> This groups the rows based on the Department column.
+-> Internally, Pandas creates two groups:
+
+Group 1: HR
+
+Department  Salary
+HR          45000
+HR          47000
+
+Group 2: IT
+
+Department  Salary
+IT          50000
+IT          60000
+
+Think of it like separating the employees into two buckets.
+
+Step 2:
+
+-> ["Salary"] -> df.groupby("Department")["Salary"] 
+-> Now you're telling Pandas: -> From each department, I only care about the Salary column.
+-> So the groups become:
+IT
+50000
+60000
+
+HR
+45000
+47000
+
+Step 3:
+
+.mean()-> df.groupby("Department")["Salary"].mean() -> Now Pandas calculates the average salary for each department.
+
+HR
+45000 + 47000 = 92000
+92000 / 2 = 46000
+
+IT
+50000 + 60000 = 110000
+110000 / 2 = 55000
+
+So the final result is:
+Department
+HR    46000.0
+IT    55000.0
+Name: Salary, dtype: float64
+
+Original DataFrame
+
+Department   Salary
+IT           50000
+HR           45000
+IT           60000
+HR           47000
+        │
+        ▼
+groupby("Department")
+        │
+        ▼
+
+IT              HR
+50000           45000
+60000           47000
+        │
+        ▼
+Select Salary
+        │
+        ▼
+mean()
+        │
+        ▼
+
+HR → 46000
+IT → 55000
+
+A simple way to remember it is:
+
+Group → Select → Aggregate
+
+-> Group the data (groupby)
+-> Select the column (["Salary"])
+-> Aggregate the values (mean(), sum(), count(), max(), min(), etc.)
+
+Common Aggregations : 
+
+df.groupby("Department").sum()
+df.groupby("Department").count()
+df.groupby("Department").max()
+df.groupby("Department").min()
+df.groupby("Department").mean()
+
+--------------------------------------------------------------------------------------------------------------------------------------
+4. pivot_table(): Creates summary tables similar to Excel Pivot Tables.
+
+A pivot table is a way to summarize and analyze data by grouping it and performing calculations such as sum, average, count, minimum, or maximum.
+Think of it as answering questions like:
+-> What is the average salary in each department?
+-> What is the total sales for each product?
+-> How many employees are there in each department?
+-> In Pandas, we use: pd.pivot_table()
+
+Example 1: Average Salary by Department
+
+import pandas as pd
+data = {
+    "Department": ["IT", "HR", "IT", "HR"],
+    "Salary": [50000, 45000, 60000, 47000]
+}
+df = pd.DataFrame(data)
+result = pd.pivot_table(
+    df,
+    index="Department",
+    values="Salary",
+    aggfunc="mean"
+)
+print(result)
+
+Output:
+            
+Department Salary
+HR         46000.0
+IT         55000.0
+
+Explanation
+-> index="Department" → Group by Department.
+-> values="Salary" → Perform calculations on the Salary column.
+-> aggfunc="mean" → Calculate the average salary.
+
+Example 2: Total Salary by Department
+
+result = pd.pivot_table(
+    df,
+    index="Department",
+    values="Salary",
+    aggfunc="sum"
+)
+print(result)
+
+Output: 
+
+            Salary
+Department
+HR           92000
+IT          110000
+
+Difference between groupby() and pivot_table():
+
+groupby() → Best for grouping and aggregating data programmatically.
+pivot_table() → Best for creating summary tables with both rows and columns, similar to an Excel Pivot Table.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+5. apply() vs map():
+
+| Feature           | `map()`                          | `apply()`                                      |
+| ----------------- | -------------------------------- | ---------------------------------------------- |
+| Works on          | **Series (single column)**       | **Series or DataFrame**                        |
+| Purpose           | Transform each value in a Series | Apply a function to rows, columns, or a Series |
+| DataFrame Support | ❌ No                             | ✅ Yes                                          |
+
+1. map(): Use map() when you want to change every value in a single column
+
+Example 1: Convert Names to Uppercase
+
+import pandas as pd
+df = pd.DataFrame({
+    "Name": ["John", "Alice", "Bob"]
+})
+df["Name"] = df["Name"].map(str.upper)
+print(df)
+
+Output: 
+    Name
+0   JOHN
+1  ALICE
+2    BOB
+
+Example 2: Multiply Values
+
+df = pd.DataFrame({
+    "Salary": [50000, 60000, 70000]
+})
+df["Salary"] = df["Salary"].map(lambda x: x * 2)
+print(df)
+
+Output:
+   Salary
+0  100000
+1  120000
+2  140000
+
+-> map() applies the function to each individual value in the Salary column
+-> Suppose you have employee salaries and want to give everyone a 10% bonus.
+
+import pandas as pd
+data = {
+    "Employee": ["John", "Alice", "Bob"],
+    "Salary": [50000, 60000, 70000]
+}
+df = pd.DataFrame(data)
+df["Salary"] = df["Salary"].map(lambda x: x * 1.10)
+print(df)
+
+Output:
+  Employee   Salary
+0     John  55000.0
+1    Alice  66000.0
+2      Bob  77000.0
+
+2. apply() on a Series: apply() can do everything map() can do on a Series.
+
+import pandas as pd
+data = {
+    "Math": [80, 90],
+    "Science": [70, 85]
+}
+df = pd.DataFrame(data)
+df["Total"] = df.apply(lambda row: row["Math"] + row["Science"], axis=1)
+print(df)
+
+Output:
+   Math  Science  Total
+0    80       70    150
+1    90       85    175
+
+Difference in One Line
+map()
+df["Salary"] = df["Salary"].map(lambda x: x * 1.10)
+
+➡️ Works on each individual value in one column.
+
+apply()
+df["Total"] = df.apply(lambda row: row["Math"] + row["Science"], axis=1)
+
+➡️ Works on an entire row (or column) and can use multiple columns together.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+6. Handling Missing Values
+Check Missing Values
+df.isnull()
+Returns True or False.
+
+Fill Missing Values
+df.fillna(0)
+
+Remove Missing Values
+df.dropna()
+
+Drop Columns
+df.dropna(axis=1)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+7. Reading/Writing CSV and Excel Files
+Read CSV
+df = pd.read_csv("employees.csv")
+Read Excel
+df = pd.read_excel("employees.xlsx")
+Write CSV
+df.to_csv("output.csv", index=False)
+Write Excel
+df.to_excel("output.xlsx", index=False)
+Pandas provides read_csv(), read_excel(), to_csv(), and to_excel() for reading from and writing to CSV and Excel files.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+8. Filtering, Sorting, and Indexing
+
+import pandas as pd
+data = {
+    "ID": [101, 102, 103, 104],
+    "Name": ["John", "Alice", "Bob", "David"],
+    "Department": ["IT", "HR", "IT", "Finance"],
+    "Salary": [50000, 45000, 60000, 55000]
+}
+df = pd.DataFrame(data)
+print(df)
+
+DataFrame:
+
+    ID   Name Department  Salary
+0  101   John         IT   50000
+1  102  Alice         HR   45000
+2  103    Bob         IT   60000
+3  104  David    Finance   55000
+
+1. Filtering: Show employees whose salary is greater than 50,000.
+
+filtered_df = df[df["Salary"] > 50000]
+print(filtered_df)
+
+Output:
+    ID   Name Department  Salary
+2  103    Bob         IT   60000
+3  104  David    Finance   55000
+
+2. Sorting: Sort employees by salary in descending order.
+
+sorted_df = df.sort_values(by="Salary", ascending=False)
+print(sorted_df)
+
+    ID   Name Department  Salary
+2  103    Bob         IT   60000
+3  104  David    Finance   55000
+0  101   John         IT   50000
+1  102  Alice         HR   45000
+
+-> by="Salary" → Sort using the Salary column.
+-> ascending=False → Highest salary first.
+
+3. Indexing: Select a Single Column
+
+print(df["Name"])
+Output:
+0     John
+1    Alice
+2      Bob
+3    David
+Name: Name, dtype: object
+
+Select a Specific Row Using iloc
+print(df.iloc[2])
+Output
+ID              103
+Name            Bob
+Department       IT
+Salary        60000
+Name: 2, dtype: object
+
+iloc[2] returns the third row (because indexing starts at 0).
