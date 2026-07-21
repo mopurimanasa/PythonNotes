@@ -1,0 +1,148 @@
+1. What is JSON?
+JSON stands for JavaScript Object Notation.
+It is a lightweight data format used for exchanging data between applications.
+Commonly used in REST APIs.
+
+Example JSON:
+{
+    "name": "John",
+    "age": 25,
+    "city": "Hyderabad"
+}
+
+Why do we use the json library?
+
+-> The json library helps convert:
+-> Python object → JSON (dumps, dump)
+-> JSON → Python object (loads, load)
+
+Function		Purpose
+json.dumps()	Python object → JSON string
+json.loads()	JSON string → Python object
+json.dump()		Write Python object to a JSON file
+json.load()		Read JSON data from a file
+
+1. json.dumps(): Converts a Python object into a JSON string.
+
+Example
+import json
+employee = {
+    "name": "John",
+    "age": 25,
+    "salary": 50000
+}
+json_data = json.dumps(employee)
+print(json_data)
+print(type(json_data))
+Output
+{"name": "John", "age": 25, "salary": 50000}
+<class 'str'>
+Remember: dumps returns a string.
+
+------------------------------------------------------------------------------------------------------
+
+2. json.loads()
+
+Converts a JSON string into a Python object.
+
+Example
+import json
+json_data = '{"name":"John","age":25}'
+employee = json.loads(json_data)
+print(employee)
+print(type(employee))
+Output
+{'name': 'John', 'age': 25}
+<class 'dict'>
+
+------------------------------------------------------------------------------------------------------
+
+3. json.dump()
+
+Writes a Python object to a JSON file.
+
+Example
+import json
+employee = {
+    "name": "Alice",
+    "age": 30
+}
+with open("employee.json", "w") as file:
+    json.dump(employee, file)
+This creates a file named employee.json:
+{"name": "Alice", "age": 30}
+
+------------------------------------------------------------------------------------------------------
+
+4. json.load()
+
+Reads JSON data from a file and converts it into a Python object.
+
+Example
+import json
+with open("employee.json", "r") as file:
+    data = json.load(file)
+print(data)
+print(type(data))
+Output
+{'name': 'Alice', 'age': 30}
+<class 'dict'>
+------------------------------------------------------------------------------------------------------
+
+5) Pretty Printing JSON
+
+Use indent to make JSON easier to read.
+
+import json
+
+employee = {
+    "name": "John",
+    "age": 25,
+    "salary": 50000
+}
+
+print(json.dumps(employee, indent=4))
+Output
+{
+    "name": "John",
+    "age": 25,
+    "salary": 50000
+}
+
+------------------------------------------------------------------------------------------------------
+
+Real-Time API Example
+
+Suppose an API returns:
+
+{
+    "employee": {
+        "name": "John",
+        "department": "IT"
+    }
+}
+
+Python code:
+
+import json
+response = '{"employee":{"name":"John","department":"IT"}}'
+data = json.loads(response)
+print(data["employee"]["name"])
+Output
+John
+
+------------------------------------------------------------------------------------------------------
+dump vs dumps
+
+| Function  | Works With    | Returns               |
+| --------- | ------------- | --------------------- |
+| `dump()`  | File          | Writes JSON to a file |
+| `dumps()` | Python object | Returns a JSON string |
+
+load vs loads
+| Function  | Reads From  | Returns       |
+| --------- | ----------- | ------------- |
+| `load()`  | JSON file   | Python object |
+| `loads()` | JSON string | Python object |
+
+------------------------------------------------------------------------------------------------------
