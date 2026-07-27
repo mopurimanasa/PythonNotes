@@ -1,0 +1,297 @@
+13) 
+
+Algorithm: Generate Track Number (Smallest Permutation)
+
+Step 1: Check the sign of the input number.
+1a. If the number is negative, set isNegative = true and use the absolute value's digits.
+1b. If the number is positive, set isNegative = false.
+
+Step 2: Extract the digits of the number into a list.
+
+Step 3: If the number is positive (isNegative = false):
+3a. Sort all digits in ascending order.
+3b. If the first digit is 0:
+- Find the first non-zero digit in the sorted list.
+- Swap it with the digit at position 0.
+3c. This produces the smallest valid permutation with no leading zero.
+
+Step 4: If the number is negative (isNegative = true):
+4a. Sort all digits in descending order. No leading-zero issue here, since descending order naturally places the largest digit first, which is non-zero unless all digits are 0.
+4b. Reattach the negative sign to the result.
+
+Step 5: Return the final track number as a string or integer, including the negative sign if applicable.
+
+-----------------------------------------------------------------------------------------------------------------
+
+14) 
+Algorithm:
+
+1. Initialize total_distance to 0.
+2. Identify the two stations between which each bus operates.
+3. Calculate the distance between those two stations.
+4. Add the calculated distance to total_distance.
+5. Repeat the same process for all the bus routes.
+6. Return total_distance.
+
+
+The question says:
+
+Bus stations are located at equal distances (unit distance) from each other.
+
+Unit distance means the distance from one station to the next station is 1 unit.
+
+Imagine the stations like this:
+
+Station ID:   1       2       3       4       5
+              ●-------●-------●-------●-------●
+Distance:         1       1       1       1
+
+Now suppose a bus operates between Station 2 and Station 5.
+
+Count the gaps:
+
+              2       3       4       5
+              ●-------●-------●-------●
+                  1       1       1
+
+                  ← 3 units →
+
+So the distance is:
+
+5 − 2 = 3 units
+
+Another example, Station 3 → 7:
+
+3 → 4 = 1
+4 → 5 = 1
+5 → 6 = 1
+6 → 7 = 1
+
+Total = 4 units
+
+7 - 3 = 4
+
+-----------------------------------------------------------------------------------------------------------------
+
+15) 
+Step 1: Father's footstep positions are X1, X1+V1, X1+2 times V1, and so on up to X1+(N-1) times V1. This is a total of N footsteps.
+
+Step 2: Martin starts at X2 and takes steps of size V2. He lands at X2+V2, then X2+2 times V2, then X2+3 times V2, and so on.
+
+Step 3: Constraint given: Martin's first step, which is X2 plus V2, must land exactly on one of his father's footsteps.
+
+Step 4: Goal: Choose V2 to maximize F. F is the total number of father's footsteps that Martin lands on during his run. 
+If multiple V2 values give the same maximum F, pick the largest V2.
+
+-----------------------------------------------------------------------------------------------------------------
+16) 
+The problem is asking us to calculate the organization's reputation after each day.
+Reputation = sum of efficiencies of all employees who are still working.
+
+Let's create a simple example just for understanding.
+
+Suppose there are 6 employees:
+
+Employee	Team	Efficiency
+1	A	10
+2	A	5
+3	A	20
+4	B	8
+5	B	15
+6	B	4
+
+Initially, reputation is:
+
+10 + 5 + 20 + 8 + 15 + 4 = 62
+
+Now suppose:
+
+K = 1
+
+That means whenever Edwin fires an employee, 1 colleague from that employee's team also resigns.
+
+And that colleague must have the lowest efficiency among the remaining team members.
+
+Day 1
+
+Suppose Edwin fires:
+
+Employee 3
+Team A
+Efficiency = 20
+
+Remove employee 3.
+
+Team A now has:
+
+Employee 1 → 10
+Employee 2 → 5
+
+Because K = 1, one colleague resigns.
+
+Who?
+
+The colleague with the lowest efficiency:
+
+Employee 2 → 5
+
+So on Day 1 we remove:
+
+Employee 3 → fired     → efficiency 20
+Employee 2 → resigned  → efficiency 5
+
+Reputation becomes:
+
+62 - 20 - 5
+= 37
+
+So:
+
+End of Day 1 → Reputation = 37
+Day 2
+
+Now remaining employees are:
+
+Employee 1 → Team A → 10
+
+Employee 4 → Team B → 8
+Employee 5 → Team B → 15
+Employee 6 → Team B → 4
+
+Suppose Edwin fires Employee 5.
+
+Employee 5 belongs to Team B.
+
+Remaining Team B colleagues:
+
+Employee 4 → 8
+Employee 6 → 4
+
+K = 1, so choose the lowest efficiency:
+
+Employee 6 → 4
+
+Remove:
+
+Employee 5 → 15
+Employee 6 → 4
+
+Previous reputation was 37.
+
+So:
+
+37 - 15 - 4
+= 18
+
+Therefore:
+
+Day 1 → Reputation = 37
+Day 2 → Reputation = 18
+=================================================================================================
+Algorithm
+
+Start by calculating:
+
+reputation = sum of efficiencies of all N employees
+
+Then, for each of the Q days:
+
+1. Find the employee Edwin fires.
+
+2. Find that employee's team.
+
+3. Remove the fired employee's efficiency
+   from the reputation.
+
+4. From the remaining employees in that team,
+   find K employees having the lowest efficiencies.
+
+5. Remove those K employees.
+
+6. Subtract their efficiencies from the reputation.
+
+7. Output the remaining reputation for that day.
+
+So the core idea is:
+
+Current reputation
+       ↓
+Remove fired employee
+       ↓
+Find K lowest-efficiency colleagues
+from the SAME team
+       ↓
+Remove them
+       ↓
+Remaining reputation
+       ↓
+Output for that day
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+17) 
+
+Suppose:
+
+N = 5
+K = 2
+
+Product prices = [1, 3, 5, 7, 9]
+
+K = 2 means we need to find pairs of products whose price difference is exactly 2.
+
+For example:
+
+Product price 1 and product price 3
+
+3 - 1 = 2
+
+So (1, 3) is a valid pair.
+
+Similarly:
+
+3 and 5 → 5 - 3 = 2  ✓
+
+5 and 7 → 7 - 5 = 2  ✓
+
+7 and 9 → 9 - 7 = 2  ✓
+
+Therefore we have:
+
+(1, 3)
+(3, 5)
+(5, 7)
+(7, 9)
+
+Total valid pairs = 4
+
+So 4 lucky customers can receive gift baskets.
+
+Algorithm
+
+We need to count all different product pairs where:
+
+absolute difference between prices = K
+
+A simple approach is:
+
+1. Take the N product prices.
+
+2. Initialize:
+   count = 0
+
+3. Take each product.
+
+4. Compare it with every product after it.
+
+5. Calculate the absolute price difference.
+
+6. If the difference is equal to K:
+       count = count + 1
+
+7. After checking all pairs,
+   return count.
+   
+-----------------------------------------------------------------------------------------------------------------
+
