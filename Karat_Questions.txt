@@ -125,3 +125,6 @@ Only a fixed number of satellites can be within the bandwidth range of a satelli
 Write an algorithm to determine the minimum number of iterations of data transfer required to connect all N satellites.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
+
+20) 
+Generate All Permutations of a String (unique characters)
