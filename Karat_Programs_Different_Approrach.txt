@@ -32,3 +32,16 @@ def flattern_List(input):'
 
 input = [[1,3,5], [8,4,5]]
 print(flattern_List(input))
+
+4) 
+Find Duplicate Number: nums has n+1 integers in [1..n] with one duplicate; find it without modifying array.
+def find_duplicate(num):
+    seen = set() 
+    for i in num:
+        if i in seen:
+            return i
+        seen.add(i)
+    return None
+    
+num = [1,2,3,4,2]
+print("Duplicates: ", find_duplicate(num))
