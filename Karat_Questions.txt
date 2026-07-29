@@ -126,5 +126,16 @@ Write an algorithm to determine the minimum number of iterations of data transfe
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-20) 
+19) 
 Generate All Permutations of a String (unique characters) - Backtracking; build path and use used[] array.
+
+20) 
+Merge K Sorted Lists (arrays): Merge k sorted lists into one sorted list. - Min-heap of (value, list_id, index).
+
+21) 
+Decode String: Decode patterns like "3[a2[c]]" -> "accaccacc". - 
+Stack for (prev_string, repeat_count).
+
+22) 
+Find Duplicate Number: nums has n+1 integers in [1..n] with one duplicate; find it without modifying array - 
+Use Floyd’s cycle detection on index/value mapping..
