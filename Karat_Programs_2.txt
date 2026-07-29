@@ -344,4 +344,326 @@ Algorithm:
 7. Continue transferring the ata to satellites that have not received it yet.
 8. when all N satellites have received the data, return the number of iterations.
 
+19) 
+Permutation means arranging all the characters in every possible order.
 
+Logic: 
+-> Take "ABC".
+-> Start with: path = ""
+-> Choose A: - path = "A"
+-> Now A is already used, so choose from B and C.
+-> Choose B: -> path = "AB"
+-> Only C remains: path = "ABC"
+-> We got one permutation: - ABC
+-> Now backtrack: remove the last choice and try another possibility.
+-> 
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+-> Choose → Explore → Undo → Try another choice
+
+Algorithm: 
+-> Create an empty result list to store permutations.
+-> Create a used array to remember which characters are currently used.
+-> Start with an empty path.
+-> Try every character in the string.
+-> If the character is already used, skip it.
+-> Otherwise, mark it as used and add it to path.
+-> Continue recursively until path has the same length as the original string.
+-> Add the completed path to result.
+-> Backtrack: remove the character and mark it unused.
+-> Continue until all possibilities are explored.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+19) def permutations(text):
+    result = []
+    used = [False] * len(text)
+
+    def backtrack(current):
+        if len(current) == len(text):
+            result.append(current)
+            return
+
+        for i in range(len(text)):
+            if used[i] == False:
+                used[i] = True
+
+                backtrack(current + text[i])
+
+                used[i] = False
+
+    backtrack("")
+
+    return result
+
+
+text = "ABC"
+
+print(permutations(text))
+---------------------------------------------------------------------------------------------------------------------------------------------
+20) 
+Merge K Sorted Lists (arrays): Merge k sorted lists into one sorted list.
+
+import heapq
+
+
+def merge_lists(lists):
+    heap = []
+    result = []
+
+    # Put the first element of each list into the heap
+    for i in range(len(lists)):
+        if lists[i]:
+            heapq.heappush(heap, (lists[i][0], i, 0))
+
+    # Continue until the heap is empty
+    while heap:
+
+        # Get the smallest value
+        value, list_id, index = heapq.heappop(heap)
+
+        # Add smallest value to result
+        result.append(value)
+
+        # Move to the next element in the same list
+        next_index = index + 1
+
+        # Check if the next element exists
+        if next_index < len(lists[list_id]):
+
+            # Get the next value
+            next_value = lists[list_id][next_index]
+
+            # Add the next value to the heap
+            heapq.heappush(
+                heap,
+                (next_value, list_id, next_index)
+            )
+
+    return result
+
+
+lists = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9]
+]
+
+print(merge_lists(lists))
+
+
+
+21) 
+Decode String: Decode patterns like "3[a2[c]]" -> "accaccacc". - 
+Stack for (prev_string, repeat_count).
+
+
+stack = [] -> Stack is used to remember the previous information
+number = repeat count
+current = string I am currently building
+
+[  → SAVE the information
+     ↓
+     process inside
+     ↓
+]  → GET BACK the saved information
+
+Initially:
+
+current = ""
+number = 3
+stack = []
+
+Take only a very simple example first:
+
+3[a]
+
+Initially:
+
+current = ""
+number = 3
+stack = []
+When [ comes
+
+We have reached:
+
+3[
+  ↑
+
+The program already knows:
+
+number = 3
+current = ""
+
+Before processing what is inside [ ], we need to remember that 3.
+
+So:
+
+stack.append((current, number))
+
+stores:
+
+("", 3)
+
+Now:
+
+stack = [("", 3)]
+
+Think of the stack as a small memory box:
+
+┌───────────────┐
+│ current = ""  │
+│ number  = 3   │
+└───────────────┘
+
+Then:
+
+current = ""
+number = 0
+
+Why reset?
+
+Because now we are entering the bracket and need to build a new current string.
+
+We read a:
+
+current = "a"
+
+So now:
+
+Stack remembers: ("", 3)
+
+current = "a"
+When ] comes
+
+We've reached:
+
+3[a]
+   ↑
+
+] means:
+
+"The inside part is finished."
+
+Our inside part is:
+
+current = "a"
+
+Now we need to remember: how many times should "a" repeat?
+
+That information is in the stack:
+
+("", 3)
+
+So:
+
+prev_string, repeat_count = stack.pop()
+
+takes it out and separates it:
+
+prev_string  = ""
+repeat_count = 3
+
+Then:
+
+current = prev_string + current * repeat_count
+
+becomes:
+
+current = "" + "a" * 3
+
+which is:
+
+current = "aaa"
+
+So:
+
+3[a] → aaa
+
+Things to remember:
+
+1. Three variables
+stack = []
+current = ""
+number = 0
+
+Remember what they mean:
+
+stack   → remembers previous information
+current → string I am currently building
+number  → repeat count
+2. There are only 4 cases
+
+When looping:
+
+for char in s:
+
+ask: What type of character did I get?
+
+Number → build the repeat count:
+
+if char.isdigit():
+    number = number * 10 + int(char)
+
+[ → save what we have:
+
+elif char == "[":
+    stack.append((current, number))
+    current = ""
+    number = 0
+
+] → get saved information and decode:
+
+elif char == "]":
+    prev_string, repeat_count = stack.pop()
+    current = prev_string + current * repeat_count
+
+Letter → simply add it:
+
+else:
+    current = current + char
+	
+
+Python Program:
+
+def decode_string(s):
+    stack = []
+    current = ""
+    number = 0
+
+    for char in s:
+
+        # If it is a number
+        if char.isdigit():
+            number = number * 10 + int(char)
+
+        # If we see [
+        elif char == "[":
+            stack.append((current, number))
+
+            current = ""
+            number = 0
+
+        # If we see ]
+        elif char == "]":
+            prev_string, repeat_count = stack.pop()
+
+            current = prev_string + current * repeat_count
+
+        # If it is a normal character
+        else:
+            current = current + char
+
+    return current
+
+
+s = "3[a2[c]]"
+
+result = decode_string(s)
+
+print(result)
+
+Number = BUILD → [ = SAVE → Letter = ADD → ] = POP & REPEAT.
