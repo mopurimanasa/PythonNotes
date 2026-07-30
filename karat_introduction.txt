@@ -1,0 +1,22 @@
+Hi, I’m Manasa. I have around 8 years of experience in software development, primarily working on backend and API development which is integrated with the
+cloud-based applications.
+
+Over the past few years, I’ve been worked for HSBC client in the Risk and Compliance domain, primarily on a project called Regulatory Mapping. 
+My role has been focused on backend and API development using Python and AWS.
+
+As part of this project, I’ve been involved in designing and developing REST APIs and serverless microservices using AWS Lambda, and API Gateway.
+I’ve also worked with AWS services such as DynamoDB, S3, SNS, and SQS based on different application requirements.
+
+For database-related work, I have experience with PostgreSQL, where I’ve worked on database design, writing SQL queries, query optimization, and performance tuning.
+
+I’ve also worked with Terraform for infrastructure provisioning and managing AWS resources. We use Terraform to automate infrastructure creation and maintain consistent 
+environments across deployments.
+
+I’ve also been involved in CI/CD pipelines using GitHub and AWS tools. We use CI/CD to automate the build, testing, and deployment process, which helps us deliver 
+application changes across environments in a consistent way.
+
+Apart from development, I’m involved in technical design discussions, code reviews, sprint planning, effort estimation, troubleshooting issues, and coordinating with business 
+analysts, architects, QA teams, and other stakeholders.
+
+I’m also involved in preparing and maintaining technical documentation, including API documentation and design-related documents,
+ to support development and smooth collaboration across teams.
