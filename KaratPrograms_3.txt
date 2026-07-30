@@ -456,3 +456,14 @@ for item in lst:
 print(count)
 
 {1: 1, 2: 2, 3: 2} 
+
+
+Second_Largest:
+
+def second_largest(nums):
+    unique_nums = list(set(nums))
+    unique_nums.sort()
+    return unique_nums[-2]
+
+nums = [10, 20, 30, 40, 50]
+print(second_largest(nums))
