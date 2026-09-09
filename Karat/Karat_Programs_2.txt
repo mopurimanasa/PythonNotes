@@ -1,0 +1,669 @@
+13) 
+
+Algorithm: Generate Track Number (Smallest Permutation)
+
+Step 1: Check the sign of the input number.
+1a. If the number is negative, set isNegative = true and use the absolute value's digits.
+1b. If the number is positive, set isNegative = false.
+
+Step 2: Extract the digits of the number into a list.
+
+Step 3: If the number is positive (isNegative = false):
+3a. Sort all digits in ascending order.
+3b. If the first digit is 0:
+- Find the first non-zero digit in the sorted list.
+- Swap it with the digit at position 0.
+3c. This produces the smallest valid permutation with no leading zero.
+
+Step 4: If the number is negative (isNegative = true):
+4a. Sort all digits in descending order. No leading-zero issue here, since descending order naturally places the largest digit first, which is non-zero unless all digits are 0.
+4b. Reattach the negative sign to the result.
+
+Step 5: Return the final track number as a string or integer, including the negative sign if applicable.
+
+-----------------------------------------------------------------------------------------------------------------
+
+14) 
+Algorithm:
+
+1. Initialize total_distance to 0.
+2. Identify the two stations between which each bus operates.
+3. Calculate the distance between those two stations.
+4. Add the calculated distance to total_distance.
+5. Repeat the same process for all the bus routes.
+6. Return total_distance.
+
+
+The question says:
+
+Bus stations are located at equal distances (unit distance) from each other.
+
+Unit distance means the distance from one station to the next station is 1 unit.
+
+Imagine the stations like this:
+
+Station ID:   1       2       3       4       5
+              ●-------●-------●-------●-------●
+Distance:         1       1       1       1
+
+Now suppose a bus operates between Station 2 and Station 5.
+
+Count the gaps:
+
+              2       3       4       5
+              ●-------●-------●-------●
+                  1       1       1
+
+                  ← 3 units →
+
+So the distance is:
+
+5 − 2 = 3 units
+
+Another example, Station 3 → 7:
+
+3 → 4 = 1
+4 → 5 = 1
+5 → 6 = 1
+6 → 7 = 1
+
+Total = 4 units
+
+7 - 3 = 4
+
+-----------------------------------------------------------------------------------------------------------------
+
+15) 
+Step 1: Father's footstep positions are X1, X1+V1, X1+2 times V1, and so on up to X1+(N-1) times V1. This is a total of N footsteps.
+
+Step 2: Martin starts at X2 and takes steps of size V2. He lands at X2+V2, then X2+2 times V2, then X2+3 times V2, and so on.
+
+Step 3: Constraint given: Martin's first step, which is X2 plus V2, must land exactly on one of his father's footsteps.
+
+Step 4: Goal: Choose V2 to maximize F. F is the total number of father's footsteps that Martin lands on during his run. 
+If multiple V2 values give the same maximum F, pick the largest V2.
+
+-----------------------------------------------------------------------------------------------------------------
+16) 
+The problem is asking us to calculate the organization's reputation after each day.
+Reputation = sum of efficiencies of all employees who are still working.
+
+Let's create a simple example just for understanding.
+
+Suppose there are 6 employees:
+
+Employee	Team	Efficiency
+1	A	10
+2	A	5
+3	A	20
+4	B	8
+5	B	15
+6	B	4
+
+Initially, reputation is:
+
+10 + 5 + 20 + 8 + 15 + 4 = 62
+
+Now suppose:
+
+K = 1
+
+That means whenever Edwin fires an employee, 1 colleague from that employee's team also resigns.
+
+And that colleague must have the lowest efficiency among the remaining team members.
+
+Day 1
+
+Suppose Edwin fires:
+
+Employee 3
+Team A
+Efficiency = 20
+
+Remove employee 3.
+
+Team A now has:
+
+Employee 1 → 10
+Employee 2 → 5
+
+Because K = 1, one colleague resigns.
+
+Who?
+
+The colleague with the lowest efficiency:
+
+Employee 2 → 5
+
+So on Day 1 we remove:
+
+Employee 3 → fired     → efficiency 20
+Employee 2 → resigned  → efficiency 5
+
+Reputation becomes:
+
+62 - 20 - 5
+= 37
+
+So:
+
+End of Day 1 → Reputation = 37
+Day 2
+
+Now remaining employees are:
+
+Employee 1 → Team A → 10
+
+Employee 4 → Team B → 8
+Employee 5 → Team B → 15
+Employee 6 → Team B → 4
+
+Suppose Edwin fires Employee 5.
+
+Employee 5 belongs to Team B.
+
+Remaining Team B colleagues:
+
+Employee 4 → 8
+Employee 6 → 4
+
+K = 1, so choose the lowest efficiency:
+
+Employee 6 → 4
+
+Remove:
+
+Employee 5 → 15
+Employee 6 → 4
+
+Previous reputation was 37.
+
+So:
+
+37 - 15 - 4
+= 18
+
+Therefore:
+
+Day 1 → Reputation = 37
+Day 2 → Reputation = 18
+=================================================================================================
+Algorithm
+
+Start by calculating:
+
+reputation = sum of efficiencies of all N employees
+
+Then, for each of the Q days:
+
+1. Find the employee Edwin fires.
+
+2. Find that employee's team.
+
+3. Remove the fired employee's efficiency
+   from the reputation.
+
+4. From the remaining employees in that team,
+   find K employees having the lowest efficiencies.
+
+5. Remove those K employees.
+
+6. Subtract their efficiencies from the reputation.
+
+7. Output the remaining reputation for that day.
+
+So the core idea is:
+
+Current reputation
+       ↓
+Remove fired employee
+       ↓
+Find K lowest-efficiency colleagues
+from the SAME team
+       ↓
+Remove them
+       ↓
+Remaining reputation
+       ↓
+Output for that day
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+17) 
+
+Suppose:
+
+N = 5
+K = 2
+
+Product prices = [1, 3, 5, 7, 9]
+
+K = 2 means we need to find pairs of products whose price difference is exactly 2.
+
+For example:
+
+Product price 1 and product price 3
+
+3 - 1 = 2
+
+So (1, 3) is a valid pair.
+
+Similarly:
+
+3 and 5 → 5 - 3 = 2  ✓
+
+5 and 7 → 7 - 5 = 2  ✓
+
+7 and 9 → 9 - 7 = 2  ✓
+
+Therefore we have:
+
+(1, 3)
+(3, 5)
+(5, 7)
+(7, 9)
+
+Total valid pairs = 4
+
+So 4 lucky customers can receive gift baskets.
+
+Algorithm
+
+We need to count all different product pairs where:
+
+absolute difference between prices = K
+
+A simple approach is:
+
+1. Take the N product prices.
+
+2. Initialize:
+   count = 0
+
+3. Take each product.
+
+4. Compare it with every product after it.
+
+5. Calculate the absolute price difference.
+
+6. If the difference is equal to K:
+       count = count + 1
+
+7. After checking all pairs,
+   return count.
+   
+-----------------------------------------------------------------------------------------------------------------
+18) 
+Satellite Data Transfer Solution: What is given ?
+There are N satellites with IDs:
+
+0,1,2,3... N-1
+-> Satellite 0 is the main satellite and initially has the data. 
+-> The goal is to transfer the data from satellite 0 until all satellites receive the data, using the minimum number of iterations.
+
+Important rules:
+-> A satellite can transfer data only to a satellite within its bandwidth range. 
+-> A satellite can send data to only one other satellite in one iteration.
+-> Once satellite receives the data, it can also start sending the data to satellites within its own range.
+-> Different satellites can transfer simultaneously. 
+
+For example:
+
+Iteration 1:
+0 -> 1
+
+Now 0 and 1 have the data.
+
+Iteration 2:
+0 -> 2
+1 -> 3
+-> Satellite 0 can send to 2
+-> At the same time, satellite 1 can send to 3
+-> This is allowed because 0 and 1 are different senders.
+
+Example:
+
+Iteration 3:
+
+1 -> 4
+2 -> 5
+
+-> for N = 5, Minimum iterations = 3
+
+Algorithm:
+
+-> Assuming the bandwidth relationshilps form a tree rooted at satellite 0:
+
+1. Start from satellite 0. 
+2. Satellite 0 already has the data.
+3. Satellite 0 sends the data to one satellite within its bandwidth range.
+4. Increase the iteration count by 1.
+5. The satellite that receives tha data can also start sending the data from the next iteration.
+6. In one iteration, each satellite that has data can send to only one other satellite.
+7. Continue transferring the ata to satellites that have not received it yet.
+8. when all N satellites have received the data, return the number of iterations.
+
+19) 
+Permutation means arranging all the characters in every possible order.
+
+Logic: 
+-> Take "ABC".
+-> Start with: path = ""
+-> Choose A: - path = "A"
+-> Now A is already used, so choose from B and C.
+-> Choose B: -> path = "AB"
+-> Only C remains: path = "ABC"
+-> We got one permutation: - ABC
+-> Now backtrack: remove the last choice and try another possibility.
+-> 
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+-> Choose → Explore → Undo → Try another choice
+
+Algorithm: 
+-> Create an empty result list to store permutations.
+-> Create a used array to remember which characters are currently used.
+-> Start with an empty path.
+-> Try every character in the string.
+-> If the character is already used, skip it.
+-> Otherwise, mark it as used and add it to path.
+-> Continue recursively until path has the same length as the original string.
+-> Add the completed path to result.
+-> Backtrack: remove the character and mark it unused.
+-> Continue until all possibilities are explored.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+19) def permutations(text):
+    result = []
+    used = [False] * len(text)
+
+    def backtrack(current):
+        if len(current) == len(text):
+            result.append(current)
+            return
+
+        for i in range(len(text)):
+            if used[i] == False:
+                used[i] = True
+
+                backtrack(current + text[i])
+
+                used[i] = False
+
+    backtrack("")
+
+    return result
+
+
+text = "ABC"
+
+print(permutations(text))
+---------------------------------------------------------------------------------------------------------------------------------------------
+20) 
+Merge K Sorted Lists (arrays): Merge k sorted lists into one sorted list.
+
+import heapq
+
+
+def merge_lists(lists):
+    heap = []
+    result = []
+
+    # Put the first element of each list into the heap
+    for i in range(len(lists)):
+        if lists[i]:
+            heapq.heappush(heap, (lists[i][0], i, 0))
+
+    # Continue until the heap is empty
+    while heap:
+
+        # Get the smallest value
+        value, list_id, index = heapq.heappop(heap)
+
+        # Add smallest value to result
+        result.append(value)
+
+        # Move to the next element in the same list
+        next_index = index + 1
+
+        # Check if the next element exists
+        if next_index < len(lists[list_id]):
+
+            # Get the next value
+            next_value = lists[list_id][next_index]
+
+            # Add the next value to the heap
+            heapq.heappush(
+                heap,
+                (next_value, list_id, next_index)
+            )
+
+    return result
+
+
+lists = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9]
+]
+
+print(merge_lists(lists))
+
+
+
+21) 
+Decode String: Decode patterns like "3[a2[c]]" -> "accaccacc". - 
+Stack for (prev_string, repeat_count).
+
+
+stack = [] -> Stack is used to remember the previous information
+number = repeat count
+current = string I am currently building
+
+[  → SAVE the information
+     ↓
+     process inside
+     ↓
+]  → GET BACK the saved information
+
+Initially:
+
+current = ""
+number = 3
+stack = []
+
+Take only a very simple example first:
+
+3[a]
+
+Initially:
+
+current = ""
+number = 3
+stack = []
+When [ comes
+
+We have reached:
+
+3[
+  ↑
+
+The program already knows:
+
+number = 3
+current = ""
+
+Before processing what is inside [ ], we need to remember that 3.
+
+So:
+
+stack.append((current, number))
+
+stores:
+
+("", 3)
+
+Now:
+
+stack = [("", 3)]
+
+Think of the stack as a small memory box:
+
+┌───────────────┐
+│ current = ""  │
+│ number  = 3   │
+└───────────────┘
+
+Then:
+
+current = ""
+number = 0
+
+Why reset?
+
+Because now we are entering the bracket and need to build a new current string.
+
+We read a:
+
+current = "a"
+
+So now:
+
+Stack remembers: ("", 3)
+
+current = "a"
+When ] comes
+
+We've reached:
+
+3[a]
+   ↑
+
+] means:
+
+"The inside part is finished."
+
+Our inside part is:
+
+current = "a"
+
+Now we need to remember: how many times should "a" repeat?
+
+That information is in the stack:
+
+("", 3)
+
+So:
+
+prev_string, repeat_count = stack.pop()
+
+takes it out and separates it:
+
+prev_string  = ""
+repeat_count = 3
+
+Then:
+
+current = prev_string + current * repeat_count
+
+becomes:
+
+current = "" + "a" * 3
+
+which is:
+
+current = "aaa"
+
+So:
+
+3[a] → aaa
+
+Things to remember:
+
+1. Three variables
+stack = []
+current = ""
+number = 0
+
+Remember what they mean:
+
+stack   → remembers previous information
+current → string I am currently building
+number  → repeat count
+2. There are only 4 cases
+
+When looping:
+
+for char in s:
+
+ask: What type of character did I get?
+
+Number → build the repeat count:
+
+if char.isdigit():
+    number = number * 10 + int(char)
+
+[ → save what we have:
+
+elif char == "[":
+    stack.append((current, number))
+    current = ""
+    number = 0
+
+] → get saved information and decode:
+
+elif char == "]":
+    prev_string, repeat_count = stack.pop()
+    current = prev_string + current * repeat_count
+
+Letter → simply add it:
+
+else:
+    current = current + char
+	
+
+Python Program:
+
+def decode_string(s):
+    stack = []
+    current = ""
+    number = 0
+
+    for char in s:
+
+        # If it is a number
+        if char.isdigit():
+            number = number * 10 + int(char)
+
+        # If we see [
+        elif char == "[":
+            stack.append((current, number))
+
+            current = ""
+            number = 0
+
+        # If we see ]
+        elif char == "]":
+            prev_string, repeat_count = stack.pop()
+
+            current = prev_string + current * repeat_count
+
+        # If it is a normal character
+        else:
+            current = current + char
+
+    return current
+
+
+s = "3[a2[c]]"
+
+result = decode_string(s)
+
+print(result)
+
+Number = BUILD → [ = SAVE → Letter = ADD → ] = POP & REPEAT.

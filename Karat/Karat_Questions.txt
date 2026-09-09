@@ -1,0 +1,141 @@
+Python Programming:
+
+1. Check whether number is even or odd
+2. Find the maximum of three numbers
+3. Reverse a string
+4. Count vowels in a string
+5. Sum of digits of a number
+6. Check if a string is a palindrome (ignore case/spaces) - Normalize string then compare with reverse
+7. Generate first N Fibonacci numbers - Maintain two variables a and b
+8. Compute factorial of n - Multiply numbers from 1..n; guard negative
+9. Check if a number is prime - Check divisors up to sqrt(n)
+10. Find the largest element in a list (without max) - Track current maximum while iterating
+---------------------------------------------------------------------------------------------------------------------------------------------
+11. 
+Problem Statement:
+There are N people living in a state. In this state, people concatenate their town name before their first name. Write an algorithm to find the name of the 
+town of the given N people, where the name of the town is the common substring and has the maximum length.
+
+Solution hint: 
+Iteratively trim prefix to match each subsequent name
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+12. 
+John misses his bus and has to walk all his way from home to school. The distance between his school and home is D units. 
+He starts his journey with an initial energy of K units. His energy decreases by 1 unit for every unit of distance walked. On his way to school,
+there are N juice stalls. Each stall has a specific amount of juice in liters. His energy increases by 1 unit for every liter of juice he consumes. 
+Note that in order to keep him walking, he should have non-zero energy. Write an algorithm to help John figure out the minimum number of juice stalls at which he should 
+stop to successfully reach the school. In case he can't reach the school, the output will be -1.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+13.
+
+In a car racing game, the participating cars must be registered online prior to the game.
+
+A car is assigned a registration number that is stored in a database. The registration number consists of digits from 0–9.
+
+The registration number can be positive or negative.
+
+A negative registration number denotes that the car is already registered online.
+A positive registration number denotes that the car is a newly registered car.
+
+Before the game starts, the system automatically assigns a track number to each car.
+
+The track number is the smallest permutation of the car's registration number and never starts with zero.
+
+Write an algorithm to generate the track number.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+14) 
+
+The city bus stations are located at equal distances (unit distance) from each other along a straight road. Each station has a unique station ID.
+
+The buses do not travel to all of the bus stations.
+
+The highway administration needs to determine the total distance that the buses cover.
+
+Given the IDs of the bus stations that have a bus operating between them, write an algorithm to help the administration find the distance covered by all the city buses.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+15) 
+
+Martin’s father goes for a jog every morning. Martin follows him several minutes later.
+
+His father starts at a position that is X1 meters away from their home and runs in a straight line at a constant speed of V1 meters per step for N steps.
+
+Martin is standing at a position X2 meters away from his home. He wonders how fast he must run, at a constant speed of V2 meters per step, to maximize F, 
+where F is the number of his father’s footsteps (step positions) that Martin will land on during his run.
+
+It is given that the first step Martin lands on from his starting position has already been landed on by his father.
+
+If more than one possible value of V2 results in the same maximum number of common steps, choose the highest possible velocity as V2.
+
+Write an algorithm to help Martin calculate F and V2.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+16) 
+
+In an organization, there are N employees, with employee IDs from 1 to N, working in different teams.
+
+Each employee has a good relationship with their fellow team members. Each employee is assigned an integer X, which represents that employee's efficiency.
+
+The sum of the efficiencies of all employees currently in the organization represents the organization's reputation.
+
+Edwin is appointed as the manager of the organization for Q days. Edwin fires one employee each day.
+
+When an employee is fired, K colleagues of that employee resign in protest. These K colleagues are the employees with the lowest efficiencies among the remaining members of the fired employee's team.
+
+Kevin, the head of the database management system, must update the organization's reputation at the end of each day.
+
+Write an algorithm to determine the reputation of the organization at the end of each day for Q days.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+17) The manager of a supermarket wishes to hold an event in which he will distribute gift baskets to lucky customers.
+
+Each gift basket contains a pair of products. Each basket contains a different product pair, although the overall value of the baskets may be the same.
+
+There are N types of products, and each product has a price.
+
+The gift baskets will be awarded to customers who pick a product pair whose difference in price is equal to a given integer value K.
+
+Write an algorithm to help the manager find the total number of lucky customers who will win a gift basket.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+18) 
+
+A space organization has N satellites in orbit. The satellites are assigned IDs from 0 to N−1.
+
+A satellite can transfer data to any other satellite that lies within its bandwidth range.
+
+A team at the organization is working on a satellite communication project. They want to transfer data from the main satellite, with ID 0, to all the other satellites.
+
+Because transferring data requires a large amount of power, a satellite can transfer data to only one other satellite at a time.
+
+After receiving the data, that satellite can connect to the organization's server, which helps it connect to other satellites near it.
+
+Only a fixed number of satellites can be within the bandwidth range of a satellite at a time.
+
+Write an algorithm to determine the minimum number of iterations of data transfer required to connect all N satellites.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+19) 
+Generate All Permutations of a String (unique characters) - Backtracking; build path and use used[] array.
+
+20) 
+Merge K Sorted Lists (arrays): Merge k sorted lists into one sorted list. - Min-heap of (value, list_id, index).
+
+21) 
+Decode String: Decode patterns like "3[a2[c]]" -> "accaccacc". - 
+Stack for (prev_string, repeat_count).
+
+22) 
+Find Duplicate Number: nums has n+1 integers in [1..n] with one duplicate; find it without modifying array - 
+Use Floyd’s cycle detection on index/value mapping..
